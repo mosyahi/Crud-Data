@@ -22,14 +22,14 @@ class Auth extends CI_Controller
 
         if($this->form_validation->run() == false) {
             $data['title'] = 'Login';
-            $this->load->view('templates/auth_header', $data);
+            // $data['active'] = 'barang';
+            // $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/login');
-            $this->load->view('templates/auth_footer');
+            // $this->load->view('templates/auth_footer');
         } else {
             $this->_login();
         }
     }
-
 
 
     private function _login()
@@ -73,9 +73,10 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Register';
-            $this->load->view('templates/auth_header', $data);
+            // $data['active'] = 'barang';
+            // $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/register');
-            $this->load->view('templates/auth_footer');
+            // $this->load->view('templates/auth_footer');
         } else {
             $data = [
                 'nama_lengkap' => htmlspecialchars($this->input->post('nama_lengkap')),

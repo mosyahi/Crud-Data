@@ -11,14 +11,16 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		$data['tb_users'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
+		
+		$data = [
+			'title' => 'Data Barang',
+			'active' => 'barang',
+			'tb_users' => $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array(),
+			'tb_barang' => $this->db->get('tb_barang')->result_array(),
+			'tb_users' => $this->db->get('tb_users')->result_array(),
+			'tb_karyawan' => $this->db->get('tb_karyawan')->result_array(),
+		];
 
-    	// Ambil data barang
-		$data['tb_barang'] = $this->db->get('tb_barang')->result_array();
-		$data['tb_karyawan'] = $this->db->get('tb_karyawan')->result_array();
-		$data['tb_users'] = $this->db->get('tb_users')->result_array();
-
-		$data['title'] = 'Dashboard';
 		$this->load->view('templates/auth_header', $data);
 		$this->load->view('user/index', $data);
 		$this->load->view('templates/auth_footer');
@@ -50,6 +52,7 @@ class User extends CI_Controller {
 
 		if($this->form_validation->run() == false) {
 			$data['title'] = 'Form Tambah Data Barang';
+			$data['active'] = 'barang';
 			$this->load->view('templates/auth_header', $data);
 			$this->load->view('user/new');
 			$this->load->view('templates/auth_footer');
